@@ -123,5 +123,23 @@ add_to(node(L,_,R),Node,Tree) :-
     
    
 %%%%%%%%%%%%%%%%%%%%%%% Expressive %%%%%%%%%%%%%%%%%%%%%%%
-    
+% The implementation of eval/3.
+eval(int(X),_,X).
+eval(var(X),List,Value) :-
+    look_up(List,X,Value).
+eval(plus(X,Y),List,Value) :-
+    eval(X,List,WX),
+    eval(Y,List,WY),
+    Value is WX + WY.    
+eval(times(X,Y),List,Value) :-
+    eval(X,List,WX),
+    eval(Y,List,WY),
+    Value is WX * WY.
+eval(pow(X,Y),List,Value) :-
+    eval(X,List,WX),
+    eval(Y,List,WY),
+    Value is WX ** WY.        
+eval(min(X),List,Value) :-
+    eval(X,List,WX),
+    Value is -WX.     
        
