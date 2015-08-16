@@ -64,4 +64,32 @@ path3(S,E,V) :-
     \+ member(edge(X,S),V),
     path3(X,E,[edge(S,X)|V]).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%Fibonacci%%%%%%%%%%%%%%%%%%%%%%%
+
+fib(1,0).
+fib(2,1).
+fib(N,R) :-
+    N > 0,
+    N1 is N-1,
+    N2 is N-2,
+    fib(N1,R1),
+    fib(N2,R2),
+    R is R1 + R2.
+    
+fib2(1,0).
+fib2(2,1).
+fib2(N,F) :-
+    N > 2,
+    fib2(N,2,1,0,F).    
+    
+fib2(N,I,F2,F1,F) :-
+    In is I + 1,
+    Fn is F2 + F1,
+    ( 
+        N = In
+    ->
+        F = Fn
+    ;
+        fib2(N,In,Fn,F2,F)
+    ).    
 
