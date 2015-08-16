@@ -143,3 +143,26 @@ eval(min(X),List,Value) :-
     eval(X,List,WX),
     Value is -WX.     
        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SIEVE %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+removeMul([],_,[]).
+removeMul([H|T],Multi,Result) :-
+    (
+        0 is H mod Multi
+    ->
+        NResult = Result
+    ;
+        Result = [H|NResult]
+    ),
+    removeMul(T,Multi,NResult).       
+    
+remove_multiples([],_,[]).
+remove_multiples([X|Xs],Candidate,Result) :-
+    (
+        0 is X mod Candidate
+    ->
+        Result = NResult
+    ;
+        Result = [X|NResult]
+    ),
+    remove_multiples(Xs,Candidate,NResult).    
