@@ -93,3 +93,35 @@ fib2(N,I,F2,F1,F) :-
         fib2(N,In,Fn,F2,F)
     ).    
 
+%%%%%%%%%%%%%%%%%%% Balanced Trees %%%%%%%%%%%%%%%%
+
+depth(empty,0).
+
+depth(node(L,_,R),D) :- depth(node(L,_,R),D,0).
+
+depth(empty,D,D).
+
+depth(node(L,_,R),D,Acc) :-
+    
+    depth(L, DL, Acc),
+    depth(R, DR, Acc),
+    D1 is max(DL, DR),
+    D is D1 + 1.  
+    
+    
+balanced(empty).
+balanced(node(L,_,R)) :-
+    depth(L,DL),
+    depth(R,DR),
+    abs(DL - DR) =< 1.
+    
+add_to(empty,X,X).
+add_to(node(L,_,R),Node,Tree) :-
+    add_to(L,Node,Tree);
+    add_to(R,Node,Tree),
+    balanced(Tree).
+    
+   
+%%%%%%%%%%%%%%%%%%%%%%% Expressive %%%%%%%%%%%%%%%%%%%%%%%
+    
+       
