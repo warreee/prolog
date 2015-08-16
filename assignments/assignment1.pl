@@ -61,6 +61,22 @@ mult(s(X),Y,Z,A) :-
     mult(X,Y,Z,R).
     
     
+%%%%%%%%%%%%%%%%%%%%%%DEPTH%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+depth(nil,0).
+
+depth(node(L,_,R),D) :- depth(node(L,_,R),D,0).
+
+depth(nil,D,D).
+
+depth(node(L,_,R),D,Acc) :-
+    
+    depth(L, DL, Acc),
+    depth(R, DR, Acc),
+    D1 is max(DL, DR),
+    D is D1 + 1.    
+    
+    
 
 
 
