@@ -77,6 +77,20 @@ depth(node(L,_,R),D,Acc) :-
     D is D1 + 1.    
     
     
+%%%%%%%%%%%%%%%%%%%%%%%%BOOLEAN Formulas%%%%%%%%%%%%%%%%%
+
+
+
+eval(tru,tru).
+eval(fal,fal).
+eval(and(A,B),tru) :-
+    eval(A,tru),
+    eval(B,tru).
+eval(and(A,B),fal) :-
+    eval(A,fal);
+    eval(B,fal).
+    
+    
 
 
 
