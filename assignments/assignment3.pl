@@ -53,7 +53,31 @@ map([H|T],P,[Y|Ys]) :-
                                          
 inc(X,Y) :- Y is X + 1.                                         
                                          
-                                         
+%%%%%%%%%%%%%%%%%%%% Stracciatella %%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                         
+     
+interpret((G1,G2)) :- !, 
+    interpret(G1), 
+    interpret(G2).
+    
+interpret(call(X)) :- !, 
+    interpret(X).
+    
+interpret('=..'(X,Y)) :- !, 
+    X =.. Y.
+    
+interpret(is(X,Y)) :- !,
+    X is Y.
+    
+interpret(true) :- !.
+interpret(Head) :- 
+    clause(Head,Body), 
+    interpret(Body).  
+     
+%%%%%%%%%%%% 
+     
+     
+     
+     
                                          
                                          
                                          
