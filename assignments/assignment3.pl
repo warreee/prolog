@@ -88,7 +88,19 @@ interpret(Head) :-
     
 interpret(fib(X,Y)) :-
     fib(X,Y).      
-     
+    
+vertolk((G1,G2),Li) :- !,
+    vertolk(G1,Li1),
+    vertolk(G2,Li2),
+    Li is Li1 + Li2.
+    
+vertolk(true,0) :- !.
+
+vertolk(Head,Li) :-
+    clause(Head,Body), vertolk(Body,LiB),
+    Li is LiB + 1.
+  
+a :- b,c,d.     
      
 %%%%%%%%%%%%%%%%%%%%%%% TM %%%%%%%%%%%%%%%%%%     
                                        
