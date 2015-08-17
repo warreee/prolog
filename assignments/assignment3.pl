@@ -40,4 +40,20 @@ teaches_multiples_courses(X,S) :-
     findall(X,
         (teaches(X,C), teaches(X,B), C \== B),
         L),
-    list_to_set(L,S).                                       
+    list_to_set(L,S).      
+    
+%%%%%%%%%%%%%%%%%%%FUNCTIONAL PROGRAMMING%%%%%%%%%%%%%%%%%%%
+
+map([],_,[]).
+
+map([H|T],P,[Y|Ys]) :-
+    F =.. [P,H,Y],
+    call(F),
+    map(T,P,Ys).                                         
+                                         
+inc(X,Y) :- Y is X + 1.                                         
+                                         
+                                         
+                                         
+                                         
+                                         
