@@ -91,6 +91,7 @@ interpret(fib(X,Y)) :-
      
      
 %%%%%%%%%%%%%%%%%%%%%%% TM %%%%%%%%%%%%%%%%%%     
-                                         
-                                         
+                                       
+tmR(tm(Lt,Head,[Rt|Rts]),tm([Head|Lt], Rt, Rts)).
+                                 
                                          
