@@ -73,11 +73,24 @@ interpret(Head) :-
     clause(Head,Body), 
     interpret(Body).  
      
-%%%%%%%%%%%% 
+%%%%%%%%%%%% Junior interpreter %%%%%%%%%%%%%%%%%
+
+interpret((G1,G2)) :-
+    !,
+    interpret(G1),
+    interpret(G2).
+    
+interpret(true) :- !.
+
+interpret(Head) :-
+    clause(Head,Body),
+    interpret(Body).   
+    
+interpret(fib(X,Y)) :-
+    fib(X,Y).      
      
      
-     
-     
+%%%%%%%%%%%%%%%%%%%%%%% TM %%%%%%%%%%%%%%%%%%     
                                          
                                          
                                          
