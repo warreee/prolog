@@ -20,10 +20,62 @@ lust_niet(jan,vlees).
 lust_niet(joris,melk).
 lust_niet(dominique,champignons).
 
-menu(Budget,Menu) :-
+menu(Budget, Menu) :-
+    menus(Menu),
     kost(Budget,Menu),  % Bereken de kost van het menu en controleer of die overeenkomt met budget.
-    lustAlles(Menu),    % Controleert of iedereen alles van het menu lust.
-    voorNa(Menu).       % Controleer of iedereen een voor- en nagerecht heeft.
+    lustAlles(Menu).    % Controleert of iedereen alles van het menu lust.
+
+    
+menus(MenuVoorstel) :-
+    findall(eet(Gast, [Voor, Hoofd, Na]),   (gast(Gast),gerecht(Voor,voorgerecht,_,_),
+                                            gerecht(Hoofd,hoofdgerecht,_,_), 
+                                            gerecht(Na, nagerecht,_,_)),Menu), % Vind alle mogelijke combinaties
+    findall(Gast, gast(Gast), Gasten),   % Vind alle gasten
+    neemVoorstel(Menu, Gasten, [], MenuVoorstel).
+    
+neemVoorstel(_, [], Acc, Acc).
+neemVoorstel(Mog, [H|T], Acc, Voorstel) :-
+    Temp = eet(H, _),
+    member(Temp, Mog),
+    neemVoorstel(Mog, T, [Temp|Acc], Voorstel).      
+    
+       
     
 kost(Budget, Menu) :-
-       
+    berekenKost(Menu, 0, Kost), % Bereken de kost van het totale menu
+    Kost == Budget.
+    
+berekenKost([], Kost, Kost).    
+
+
+    
+berekenKost([eet(_,PM)|PMS], Acc, Kost) :-    
+    berekenKostPers(PM, 0, KostPM),     %Bereken kost van 1 persoon
+    Temp is Acc + KostPM,
+    berekenKost(PMS, Temp, Kost).
+    
+    
+berekenKostPers([], Kost, Kost).
+berekenKostPers([H|T], Acc, Kost) :-
+        gerecht(H, _, Prijs, _),
+        Temp is Acc + Prijs,
+        berekenKostPers(T, Temp, Kost).
+ 
+lustAlles([]).        
+lustAlles([H|T]) :-
+    persLustAlles(H),
+    lustAlles(T).
+    
+persLustAlles(eet(Pers, Gerechten)) :-
+    findall(Ingr, lust_niet(Pers, Ingr), LustNiet),
+    ingred(Gerechten, [], Ingred),
+    member(X,LustNiet),
+    not(member(X,Ingred)). 
+ 
+% Zoek alle ingrediënten    
+ingred([], Ingred, Ingred).    
+ingred([H|T], Acc, Ingred) :-
+    gerecht(H, _, _, Ing),
+    append(Ing, Acc, Ings),
+    ingred(T, Ings, Ingred).                            
+          
