@@ -1,0 +1,16 @@
+land(polen,pot1,23.806).
+land(nederland,pot1,40.860).
+land(spanje,pot1,43.116).
+land(oekraine,pot1,28.029).
+land(duitsland,pot2,40.446).
+land(italie,pot2,34.357).
+land(engeland,pot2,33.563).
+land(rusland,pot2,33.212).
+land(kroatie,pot3,33.003).
+land(griekenland,pot3,32.455).
+land(portugal,pot3,31.717).
+land(zweden,pot3,31.675).
+land(denemarken,pot4,31.205).
+land(frankrijk,pot4,30.508).
+land(tsjechie,pot4,29.602).
+land(ierland,pot4,28.576).
